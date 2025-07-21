@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WaveMeet</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #121212;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+    }
+
+    header {
+      padding: 20px;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #00e5ff;
+    }
+
+    .videos {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 20px;
+    }
+
+    video {
+      width: 45%;
+      max-width: 480px;
+      height: auto;
+      background: #000;
+      border: 3px solid #00e5ff;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      video {
+        width: 90%;
+      }
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 15px;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>🔵 WaveMeet – Modern Video Chat</header>
+
+  <div class="videos">
+    <video id="localVideo" autoplay muted playsinline></video>
+    <video id="remoteVideo" autoplay playsinline></video>
+  </div>
+
+  <footer>Built with 🐍 Python + WebRTC</footer>
+
+  <script>
+    const localVideo = document.getElementById('localVideo');
+    const remoteVideo = document.getElementById('remoteVideo');
+
+    const pc = new RTCPeerConnection();
+
+    pc.ontrack = (event) => {
+      remoteVideo.srcObject = event.streams[0];
+    };
+
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+      .then(stream => {
+        localVideo.srcObject = stream;
+        stream.getTracks().forEach(track => pc.addTrack(track, stream));
+        return pc.createOffer();
+      })
+      .then(offer => pc.setLocalDescription(offer))
+      .then(() => fetch('/offer', {
+        body: JSON.stringify(pc.localDescription),
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST'
+      }))
+      .then(response => response.json())
+      .then(answer => pc.setRemoteDescription(answer));
+  </script>
+</body>
+</html>
