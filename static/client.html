@@ -1,19 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Zoom Clone</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wave Meet</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    body { margin: 0; font-family: sans-serif; }
-    video { width: 45%; margin: 5px; border-radius: 8px; }
-    #videos { display: flex; flex-wrap: wrap; justify-content: center; }
-  </style>
-</head>
-<body>
-  <h2>Zoom Clone Room</h2>
-  <input id="roomInput" placeholder="Enter room name">
-  <button onclick="joinRoom()">Join</button>
-  <div id="videos"></div>
-  <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
-  <script src="script.js"></script>
-</body>
-</html>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #1c1c1c;
+      color: #fff;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #00bfff;
+    }
+
+    .join-box {
+      background: #2a2a2a;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0
