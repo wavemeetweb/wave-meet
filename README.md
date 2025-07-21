@@ -1,6 +1,6 @@
 # 🎥 Wave Meet – A Zoom-Style Video Conferencing App
 
-Wave Meet is a modern, lightweight video conferencing web app built using **Python (Flask)**, **Socket.IO**, and **WebRTC**. Inspired by Zoom, it supports private meeting rooms, real-time video/audio communication, and a responsive user interface.
+Wave Meet is a modern, lightweight video conferencing web app built using python Inspired by Zoom, it supports private meeting rooms, real-time video/audio communication, and a responsive user interface.
 
 ---
 
