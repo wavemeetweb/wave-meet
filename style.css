@@ -1,1 +1,50 @@
+body {
+  margin: 0;
+  background-color: #202124;
+  color: white;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #1a1a1a;
+  border-bottom: 1px solid #444;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.controls button {
+  margin-left: 10px;
+  background-color: #444;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 10px;
+  padding: 20px;
+}
+
+video {
+  width: 100%;
+  border-radius: 10px;
+  background-color: black;
+}
+
+.footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #1a1a1a;
+  color: #888;
+}
 
