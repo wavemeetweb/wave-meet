@@ -1,36 +1,52 @@
-const myVideo = document.getElementById('my-video');
-const peerVideo = document.getElementById('peer-video');
-const peerIdInput = document.getElementById('peer-id-input');
+const videoGrid = document.getElementById("video-grid");
+const myVideo = document.createElement("video");
+myVideo.muted = true;
+let myStream;
 
-const myPeer = new Peer(); // auto-generate ID from PeerJS Cloud
-let localStream;
+navigator.mediaDevices.getUserMedia({
+  video: true,
+  audio: true
+}).then(stream => {
+  myStream = stream;
+  addVideoStream(myVideo, stream);
 
-// Display own Peer ID
-myPeer.on('open', id => {
-  alert("Your Peer ID: " + id + "\nSend this to your friend to connect.");
-});
+  const peer = new Peer();
+  peer.on("open", id => {
+    console.log("My peer ID is: " + id);
+  });
 
-// Get camera + mic
-navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
-  localStream = stream;
-  myVideo.srcObject = stream;
-
-  // When someone calls you
-  myPeer.on('call', call => {
+  peer.on("call", call => {
     call.answer(stream);
-    call.on('stream', remoteStream => {
-      peerVideo.srcObject = remoteStream;
+    const video = document.createElement("video");
+    call.on("stream", userVideoStream => {
+      addVideoStream(video, userVideoStream);
+    });
+  });
+
+  document.getElementById("startBtn").addEventListener("click", () => {
+    const peerId = prompt("Enter peer ID to connect:");
+    const call = peer.call(peerId, stream);
+    const video = document.createElement("video");
+    call.on("stream", userVideoStream => {
+      addVideoStream(video, userVideoStream);
     });
   });
 });
 
-function callPeer() {
-  const peerId = peerIdInput.value.trim();
-  if (!peerId) return alert("Enter a peer ID to call!");
+document.getElementById("muteBtn").addEventListener("click", () => {
+  const enabled = myStream.getAudioTracks()[0].enabled;
+  myStream.getAudioTracks()[0].enabled = !enabled;
+});
 
-  const call = myPeer.call(peerId, localStream);
-  call.on('stream', remoteStream => {
-    peerVideo.srcObject = remoteStream;
+document.getElementById("stopBtn").addEventListener("click", () => {
+  const enabled = myStream.getVideoTracks()[0].enabled;
+  myStream.getVideoTracks()[0].enabled = !enabled;
+});
+
+function addVideoStream(video, stream) {
+  video.srcObject = stream;
+  video.addEventListener("loadedmetadata", () => {
+    video.play();
   });
+  videoGrid.append(video);
 }
-
