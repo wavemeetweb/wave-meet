@@ -8,20 +8,17 @@
 </head>
 <body>
   <div class="navbar">
-    <h1>Wave Meet</h1>
-  </div>
-
-  <div class="main">
-    <video id="my-video" autoplay muted></video>
-    <video id="peer-video" autoplay></video>
-
-    <div class="controls">
-      <input id="peer-id-input" placeholder="Enter Peer ID to call" />
-      <button onclick="callPeer()">Call</button>
+    <div class="logo">Wave Meet</div>
+    <div class="actions">
+      <button id="startBtn">Start</button>
+      <button id="muteBtn">Mute</button>
+      <button id="stopBtn">Stop Video</button>
     </div>
   </div>
 
-  <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+  <div id="video-grid"></div>
+
+  <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
