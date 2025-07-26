@@ -1,1 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zoom Clone - Join or Host</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 2rem; }
+    .container { max-width: 400px; margin: auto; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 0 10px #ccc; }
+    h1 { text-align: center; margin-bottom: 1.5rem; }
+    input[type=text] { width: 100%; padding: 0.75rem; margin: 0.5rem 0 1rem; border: 1px solid #ccc; border-radius: 4px; }
+    button { width: 100%; padding: 0.75rem; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    .toggle-link { margin-top: 1rem; text-align: center; color: #007bff; cursor: pointer; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Zoom Clone</h1>
+
+    <form id="hostForm">
+      <input type="text" id="hostName" placeholder="Enter your name" required />
+      <button type="submit">Host a Meeting</button>
+    </form>
+
+    <form id="joinForm" class="hidden">
+      <input type="text" id="joinName" placeholder="Enter your name" required />
+      <input type="text" id="meetingId" placeholder="Enter Meeting ID" required />
+      <button type="submit">Join Meeting</button>
+    </form>
+
+    <div class="toggle-link" id="toggleLink">Join a Meeting?</div>
+  </div>
+
+  <script>
+    const hostForm = document.getElementById('hostForm');
+    const joinForm = document.getElementById('joinForm');
+    const toggleLink = document.getElementById('toggleLink');
+
+    toggleLink.addEventListener('click', () => {
+      if (hostForm.classList.contains('hidden')) {
+        // Show host, hide join
+        hostForm.classList.remove('hidden');
+        joinForm.classList.add('hidden');
+        toggleLink.textContent = 'Join a Meeting?';
+      } else {
+        // Show join, hide host
+        hostForm.classList.add('hidden');
+        joinForm.classList.remove('hidden');
+        toggleLink.textContent = 'Host a Meeting?';
+      }
+    });
+
+    hostForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('hostName').value.trim();
+      if(name) {
+        // Logic to create a new meeting with host name
+        alert(`Hosting meeting as: ${name}`);
+        // Redirect or initiate backend API call here
+      }
+    });
+
+    joinForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('joinName').value.trim();
+      const meetingId = document.getElementById('meetingId').value.trim();
+      if(name && meetingId) {
+        // Logic to join a meeting with name and meeting ID
+        alert(`Joining meeting ${meetingId} as: ${name}`);
+        // Redirect or initiate backend API call here
+      }
+    });
+  </script>
+
+</body>
+</html>
 
