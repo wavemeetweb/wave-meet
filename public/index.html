@@ -2,80 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Zoom Clone - Join or Host</title>
+  <title>Wave Meet - Host or Join</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 2rem; }
-    .container { max-width: 400px; margin: auto; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 0 10px #ccc; }
-    h1 { text-align: center; margin-bottom: 1.5rem; }
-    input[type=text] { width: 100%; padding: 0.75rem; margin: 0.5rem 0 1rem; border: 1px solid #ccc; border-radius: 4px; }
-    button { width: 100%; padding: 0.75rem; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
-    button:hover { background: #0056b3; }
-    .toggle-link { margin-top: 1rem; text-align: center; color: #007bff; cursor: pointer; }
-    .hidden { display: none; }
+    body { font-family: Arial, sans-serif; background: #f0f2f5; padding: 2rem; }
+    .container { max-width: 400px; margin: auto; background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 0 10px #ccc; }
+    input, button { width: 100%; padding: 0.7rem; margin: 0.5rem 0; border-radius: 4px; border: 1px solid #ccc; }
+    button { background-color: #007bff; color: white; border: none; cursor: pointer; }
+    button:hover { background-color: #0056b3; }
   </style>
 </head>
 <body>
-
   <div class="container">
-    <h1>Zoom Clone</h1>
+    <h2>Host a Meeting</h2>
+    <input type="text" id="hostName" placeholder="Enter your name" required />
+    <button id="hostBtn">Host Meeting</button>
 
-    <form id="hostForm">
-      <input type="text" id="hostName" placeholder="Enter your name" required />
-      <button type="submit">Host a Meeting</button>
-    </form>
-
-    <form id="joinForm" class="hidden">
-      <input type="text" id="joinName" placeholder="Enter your name" required />
-      <input type="text" id="meetingId" placeholder="Enter Meeting ID" required />
-      <button type="submit">Join Meeting</button>
-    </form>
-
-    <div class="toggle-link" id="toggleLink">Join a Meeting?</div>
+    <h2 style="margin-top:2rem;">Or Join a Meeting</h2>
+    <input type="text" id="joinName" placeholder="Enter your name" required />
+    <input type="text" id="roomId" placeholder="Enter Meeting ID" required />
+    <button id="joinBtn">Join Meeting</button>
   </div>
 
-  <script>
-    const hostForm = document.getElementById('hostForm');
-    const joinForm = document.getElementById('joinForm');
-    const toggleLink = document.getElementById('toggleLink');
+<script>
+  document.getElementById('hostBtn').onclick = () => {
+    const name = document.getElementById('hostName').value.trim();
+    if(!name) return alert('Please enter your name');
+    // Generate random room ID
+    const roomId = Math.random().toString(36).substring(2, 10);
+    // Redirect to room.html with params
+    window.location.href = `room.html?roomId=${roomId}&userName=${encodeURIComponent(name)}`;
+  };
 
-    toggleLink.addEventListener('click', () => {
-      if (hostForm.classList.contains('hidden')) {
-        // Show host, hide join
-        hostForm.classList.remove('hidden');
-        joinForm.classList.add('hidden');
-        toggleLink.textContent = 'Join a Meeting?';
-      } else {
-        // Show join, hide host
-        hostForm.classList.add('hidden');
-        joinForm.classList.remove('hidden');
-        toggleLink.textContent = 'Host a Meeting?';
-      }
-    });
-
-    hostForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = document.getElementById('hostName').value.trim();
-      if(name) {
-        // Logic to create a new meeting with host name
-        alert(`Hosting meeting as: ${name}`);
-        // Redirect or initiate backend API call here
-      }
-    });
-
-    joinForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = document.getElementById('joinName').value.trim();
-      const meetingId = document.getElementById('meetingId').value.trim();
-      if(name && meetingId) {
-        // Logic to join a meeting with name and meeting ID
-        alert(`Joining meeting ${meetingId} as: ${name}`);
-        // Redirect or initiate backend API call here
-      }
-    });
-  </script>
-
+  document.getElementById('joinBtn').onclick = () => {
+    const name = document.getElementById('joinName').value.trim();
+    const roomId = document.getElementById('roomId').value.trim();
+    if(!name || !roomId) return alert('Please enter your name and room ID');
+    window.location.href = `room.html?roomId=${roomId}&userName=${encodeURIComponent(name)}`;
+  };
+</script>
 </body>
 </html>
-
