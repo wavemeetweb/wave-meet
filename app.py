@@ -3,20 +3,34 @@ from flask import Flask, render_template, redirect, url_for, request
 
 app = Flask(__name__)
 
+# In-memory "scheduled meetings" demo, not persistent!
+scheduled_meetings = [
+    {'title': 'Friday Team Sync', 'id': 'abc123'},
+    {'title': 'Client Demo', 'id': 'xyz789'},
+]
+
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method == "POST":
-        # Placeholder for authentication logic
         return redirect(url_for("meeting"))
     return render_template("auth.html")
 
+@app.route("/create")
+def create():
+    # Generate a unique meeting ID (6 random letters/numbers)
+    import random, string
+    meeting_id = ''.join(random.choices(string.ascii_letters + string.digits, k=6))
+    # For demo, add to scheduled meetings list
+    scheduled_meetings.append({'title': f'New Meeting ({meeting_id})', 'id': meeting_id})
+    return redirect(url_for("meeting", meeting_id=meeting_id))
+
 @app.route("/meeting")
-def meeting():
-    return render_template("meeting.html")
+@app.route("/meeting/<meeting_id>")
+def meeting(meeting_id=None):
+    return render_template("meeting.html", meeting_id=meeting_id, scheduled_meetings=scheduled_meetings)
 
 @app.route("/ai")
 def ai():
-    # Simple AI page with link to ChatGPT
     return '''
     <html>
     <head>
@@ -39,4 +53,3 @@ def ai():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
-
