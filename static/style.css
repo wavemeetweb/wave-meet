@@ -55,6 +55,10 @@ body {
   color: #fff;
   margin-bottom: 0.6rem;
 }
+.btn--secondary {
+  background: linear-gradient(90deg, #ac9efd, #7c3aed);
+  color: #312783;
+}
 .btn:hover { opacity: 0.93; box-shadow: 0 2px 12px 2px #7c3aed55; }
 .switch-text {
   font-size: 0.98rem;
@@ -148,4 +152,3 @@ body {
 .meeting-container h1 {
   margin-bottom: 1rem;
 }
-
