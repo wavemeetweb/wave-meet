@@ -1,1 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wave Meet - Signup/Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-card" id="auth-card">
+      <div class="media-controls">
+        <video id="auth-video-preview" autoplay playsinline muted></video>
+        <div class="toggle-controls">
+          <button id="toggle-mic" type="button" class="btn-toggle" aria-label="Toggle Microphone">
+            <span id="mic-icon">🎤</span>
+          </button>
+          <button id="toggle-cam" type="button" class="btn-toggle" aria-label="Toggle Camera">
+            <span id="cam-icon">📹</span>
+          </button>
+        </div>
+      </div>
+      <!-- Login Form -->
+      <form id="login-form" class="auth-form active" method="post" action="/">
+        <h2>Login to Wave Meet</h2>
+        <div class="input-group">
+          <input type="email" id="login-email" name="email" placeholder="Email" required />
+        </div>
+        <div class="input-group">
+          <input type="password" id="login-password" name="password" placeholder="Password" required />
+        </div>
+        <button type="submit" class="btn btn--primary">Login</button>
+        <p class="switch-text">
+          Don't have an account?
+          <a href="#" id="goto-signup">Sign up</a>
+        </p>
+      </form>
+      <!-- Signup Form (demo only) -->
+      <form id="signup-form" class="auth-form" style="display:none;">
+        <h2>Create Your Account</h2>
+        <div class="input-group">
+          <input type="text" id="signup-username" name="username" placeholder="Username" required />
+        </div>
+        <div class="input-group">
+          <input type="email" id="signup-email" name="email" placeholder="Email" required />
+        </div>
+        <div class="input-group">
+          <input type="password" id="signup-password" name="password" placeholder="Password" required />
+        </div>
+        <div class="input-group">
+          <input type="password" id="signup-confirm" placeholder="Confirm Password" required />
+        </div>
+        <button type="button" class="btn btn--primary" id="fake-signup">Sign Up</button>
+        <p class="switch-text">
+          Already have an account?
+          <a href="#" id="goto-login">Login</a>
+        </p>
+      </form>
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='auth.js') }}"></script>
+</body>
+</html>
 
