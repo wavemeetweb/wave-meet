@@ -1,1 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wave Meet - Meeting Room</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="meeting-wrapper">
+    <aside class="sidebar">
+      <div class="sidebar-item">
+        <a href="{{ url_for('ai') }}">AI</a>
+      </div>
+    </aside>
+    <main class="meeting-main">
+      <h1>Welcome to Wave Meet Room!</h1>
+      <p style="color:#aaa;">(This is your meeting room. Implement video call UI here.)</p>
+      <button onclick="window.location.href='/'" class="btn btn--primary">Log Out</button>
+    </main>
+  </div>
+</body>
+</html>
 
