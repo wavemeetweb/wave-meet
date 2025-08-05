@@ -12,13 +12,29 @@
       <div class="sidebar-item">
         <a href="{{ url_for('ai') }}">AI</a>
       </div>
+      <div class="sidebar-item">
+        <strong>Scheduled Meetings</strong>
+        <ul style="list-style:none;padding:0;color:#ac9efd;">
+          {% for meeting in scheduled_meetings %}
+            <li style="margin-bottom:8px;">
+              <a style="color:#ac9efd;" href="{{ url_for('meeting', meeting_id=meeting.id) }}">{{ meeting.title }}</a>
+              {% if meeting_id and meeting_id == meeting.id %}<span style="color:#fff;">←</span>{% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="sidebar-item">
+        <a href="/create">+ Create New Meeting</a>
+      </div>
     </aside>
     <main class="meeting-main">
       <h1>Welcome to Wave Meet Room!</h1>
+      {% if meeting_id %}
+        <p style="color:#ac9efd;">Meeting link: <b>{{ request.url_root }}meeting/{{ meeting_id }}</b></p>
+      {% endif %}
       <p style="color:#aaa;">(This is your meeting room. Implement video call UI here.)</p>
       <button onclick="window.location.href='/'" class="btn btn--primary">Log Out</button>
     </main>
   </div>
 </body>
 </html>
-
