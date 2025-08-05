@@ -3,7 +3,7 @@ from flask import Flask, render_template, redirect, url_for, request
 
 app = Flask(__name__)
 
-# In-memory "scheduled meetings" demo, not persistent!
+# In-memory scheduled meetings demo list
 scheduled_meetings = [
     {'title': 'Friday Team Sync', 'id': 'abc123'},
     {'title': 'Client Demo', 'id': 'xyz789'},
@@ -12,15 +12,14 @@ scheduled_meetings = [
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method == "POST":
+        # Placeholder: accept all login attempts and redirect to meeting page
         return redirect(url_for("meeting"))
     return render_template("auth.html")
 
 @app.route("/create")
 def create():
-    # Generate a unique meeting ID (6 random letters/numbers)
     import random, string
     meeting_id = ''.join(random.choices(string.ascii_letters + string.digits, k=6))
-    # For demo, add to scheduled meetings list
     scheduled_meetings.append({'title': f'New Meeting ({meeting_id})', 'id': meeting_id})
     return redirect(url_for("meeting", meeting_id=meeting_id))
 
