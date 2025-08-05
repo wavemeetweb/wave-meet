@@ -28,6 +28,13 @@ document.addEventListener('DOMContentLoaded', function() {
     };
   }
 
+  const createBtn = document.getElementById("create-meeting-btn");
+  if (createBtn) {
+    createBtn.onclick = function() {
+      window.location.href = '/create';
+    }
+  }
+
   let mediaStream, audioTrack, videoTrack;
   const videoElem = document.getElementById('auth-video-preview');
   const micBtn = document.getElementById('toggle-mic');
@@ -62,4 +69,3 @@ document.addEventListener('DOMContentLoaded', function() {
   };
   setupMediaPreview();
 });
-
