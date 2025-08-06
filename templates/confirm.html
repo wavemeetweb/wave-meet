@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Confirm Your Login/Signup</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-card">
+      <h2>Confirm Your Account</h2>
+      <p>
+        We've sent a confirmation code to <br>
+        <b style="color:#ac9efd;">{{ email }}</b>
+      </p>
+      {% if error %}
+        <div style="color:#ff5c5c; font-weight:bold;">{{ error }}</div>
+      {% endif %}
+      <form method="POST" action="/confirm">
+        <div class="input-group">
+          <input type="text" name="confirm_code" placeholder="Enter confirmation code" required autocomplete="one-time-code" />
+        </div>
+        <button type="submit" class="btn btn--primary">Confirm</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
