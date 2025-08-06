@@ -4,7 +4,7 @@ from flask import Flask, render_template, redirect, url_for, request, session, f
 from flask_mail import Mail, Message
 
 app = Flask(__name__)
-app.secret_key = 'your-secret-key'
+app.secret_key = 'c1d98056b273273a7d4c2e7be9d4788e1cba5c9b6f9a8faf8f5a96a17c20de31'
 
 # Flask-Mail configuration with Gmail SMTP
 app.config.update(
@@ -12,7 +12,7 @@ app.config.update(
     MAIL_PORT=465,
     MAIL_USE_SSL=True,
     MAIL_USERNAME='wavemeett@gmail.com',
-    MAIL_PASSWORD='YOUR_GMAIL_APP_PASSWORD',  # Use App Password if 2FA enabled
+    MAIL_PASSWORD='happy@123',  # Use App Password if 2FA enabled
     MAIL_DEFAULT_SENDER='wavemeett@gmail.com'
 )
 
