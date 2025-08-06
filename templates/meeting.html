@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wave Meet - Meeting Room</title>
+  <title>Wave Meet - Meeting Room {{ meeting_id }}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -24,17 +24,68 @@
         </ul>
       </div>
       <div class="sidebar-item">
-        <a href="/create">+ Create New Meeting</a>
+        <a href="{{ url_for('create') }}">+ Create New Meeting</a>
       </div>
     </aside>
     <main class="meeting-main">
+      <div class="video-grid">
+        <!-- Local webcam preview -->
+        <video id="local-video" autoplay playsinline muted></video>
+      </div>
+
+      <div class="meeting-controls">
+        <button id="toggle-mic" class="ctrl-btn" aria-label="Toggle Microphone"><span id="mic-icon">🎤</span></button>
+        <button id="toggle-cam" class="ctrl-btn" aria-label="Toggle Camera"><span id="cam-icon">📹</span></button>
+        <button onclick="window.location.href='/'" class="ctrl-btn" aria-label="Leave Meeting" style="color:#ff5c5c;font-size:1.2rem;">⏏️ Leave</button>
+      </div>
+
       <h1>Welcome to Wave Meet Room!</h1>
       {% if meeting_id %}
         <p style="color:#ac9efd;">Meeting link: <b>{{ request.url_root }}meeting/{{ meeting_id }}</b></p>
       {% endif %}
-      <p style="color:#aaa;">(This is your meeting room. Implement video call UI here.)</p>
-      <button onclick="window.location.href='/'" class="btn btn--primary">Log Out</button>
+      <p style="color:#aaa;">(This is your meeting room. Video call UI and more controls go here.)</p>
     </main>
   </div>
+
+  <script>
+    let mediaStream;
+    let audioTrack, videoTrack;
+    const videoElem = document.getElementById('local-video');
+    const micBtn = document.getElementById('toggle-mic');
+    const micIcon = document.getElementById('mic-icon');
+    const camBtn = document.getElementById('toggle-cam');
+    const camIcon = document.getElementById('cam-icon');
+
+    async function setupMediaPreview() {
+      try {
+        mediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        videoElem.srcObject = mediaStream;
+        [videoTrack] = mediaStream.getVideoTracks();
+        [audioTrack] = mediaStream.getAudioTracks();
+        audioTrack.enabled = true;
+        videoTrack.enabled = true;
+      } catch (err) {
+        alert("Could not access camera or microphone. Please allow permissions!");
+        camIcon.textContent = '🚫';
+        micIcon.textContent = '🔇';
+      }
+    }
+
+    micBtn.onclick = () => {
+      if (!audioTrack) return;
+      audioTrack.enabled = !audioTrack.enabled;
+      micBtn.classList.toggle('active', !audioTrack.enabled);
+      micIcon.textContent = audioTrack.enabled ? '🎤' : '🔇';
+    };
+
+    camBtn.onclick = () => {
+      if (!videoTrack) return;
+      videoTrack.enabled = !videoTrack.enabled;
+      camBtn.classList.toggle('active', !videoTrack.enabled);
+      camIcon.textContent = videoTrack.enabled ? '📹' : '🚫';
+    };
+
+    window.addEventListener('DOMContentLoaded', setupMediaPreview);
+  </script>
 </body>
 </html>
