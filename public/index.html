@@ -1,30 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wave Meet - Modern Video Conferencing</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wave Meet - Modern Video Conferencing</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <!-- Landing Page -->
-    <div id="landing-page" class="page">
-        <div class="landing-container">
-            <div class="logo-section">
-                <div class="logo">
-                    <span class="wave-icon">🌊</span>
-                    <h1>Wave Meet</h1>
-                </div>
-                <p class="tagline">Connect, collaborate, and communicate with ease</p>
-            </div>
-            
-            <div class="actions-section">
-                <div class="join-meeting-card">
-                    <h3>Join a Meeting</h3>
-                    <div class="input-group">
-                        <input type="text" id="room-id" class="form-control" placeholder="Enter Room ID" maxlength="10">
-                        <button class="btn btn--primary" id="join-btn">Join Meeting</button>
-                    </div>
-                </div>
-                
-                <div class="divider">
+  <!-- Landing Page -->
+  <div id="landing-page" class="page">
+    <div class="landing-container">
+
+      <div class="logo-section">
+        <div class="logo">
+          <span class="wave-icon" aria-label="Wave Icon">🌊</span>
+          <h1>Wave Meet</h1>
+        </div>
+        <p class="tagline">Connect, collaborate, and communicate with ease</p>
+      </div>
+
+      <div class="actions-section">
+        <div class="join-meeting-card">
+          <h3>Join a Meeting</h3>
+          <div class="input-group">
+            <input
+              type="text"
+              id="room-id"
+              class="form-control"
+              placeholder="Enter Room ID"
+              maxlength="10"
+              aria-label="Room ID"
+              autocomplete="off"
+            />
+            <button class="btn btn--primary" id="join-btn">Join Meeting</button>
+          </div>
+        </div>
+
+        <div class="divider"><span>or</span></div>
+
+        <div class="create-meeting-card">
+          <h3>Create a New Meeting</h3>
+          <button class="btn btn--secondary" id="create-btn">Create Meeting</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Meeting Page -->
+  <div id="meeting-page" class="page" style="display:none;">
+    <div class="meeting-header">
+      <h2>Meeting Room: <span id="current-room-id"></span></h2>
+      <div>Meeting time: <span id="meeting-timer">00:00</span></div>
+    </div>
+    <div class="meeting-main">
+      <div id="video-container">
+        <!-- Local video preview can go here -->
+        <video id="local-video" autoplay playsinline muted style="width:100%; max-width:600px; background:#000;"></video>
+      </div>
+
+      <div class="meeting-controls">
+        <!-- Add mic/cam toggle buttons as you expand the UI -->
+        <button id="leave-btn" class="btn btn--danger">Leave Meeting</button>
+      </div>
+
+      <div id="participants-list" class="participants-list">
+        <!-- Participant list rendered here -->
+      </div>
+
+      <div id="chat-container" class="chat-container">
+        <div id="chat-messages" class="chat-messages"></div>
+        <input id="chat-input" type="text" placeholder="Type a message..." />
+        <button id="chat-send-btn" class="btn btn--primary">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
