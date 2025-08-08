@@ -1,7 +1,7 @@
 {
   "name": "wave-meet",
   "version": "1.0.0",
-  "description": "Wave Meet - Modern Video Conferencing App",
+  "description": "Wave Meet - Video Conferencing App",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
