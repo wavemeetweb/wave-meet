@@ -1,5 +1,5 @@
 const urlParams = new URLSearchParams(window.location.search);
-const name = urlParams.get('name');
+const name = urlParams.get('user');
 const room = urlParams.get('room');
 
 document.getElementById('room-id').textContent = room;
@@ -17,17 +17,15 @@ socket.on('room-participants', participants => {
   });
 });
 
-// Local video stream
 (async () => {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ video:true, audio:true });
     document.getElementById('local-video').srcObject = stream;
-  } catch(err) {
-    alert('Camera access denied.');
+  } catch (err) {
+    alert('Camera access denied');
   }
 })();
 
 document.getElementById('leave-btn').addEventListener('click', () => {
-  window.location.href = '/';
+  window.location.href = `dashboard.html?user=${encodeURIComponent(name)}`;
 });
-
