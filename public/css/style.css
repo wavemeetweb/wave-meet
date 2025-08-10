@@ -1,1 +1,61 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+  margin:0; padding:0;
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+h1, h2 {
+  margin-bottom: 1rem;
+}
+
+input, button {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.4rem 0;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+}
+
+input {
+  background: rgba(255,255,255,0.1);
+  color: white;
+}
+
+button {
+  background: #34d399;
+  color: white;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #059669;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+.participants {
+  margin-top: 1rem;
+  text-align: left;
+}
+
+video {
+  width:100%;
+  border-radius: 10px;
+  background: black;
+}
 
