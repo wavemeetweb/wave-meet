@@ -1,25 +1,25 @@
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  font-family: Arial, sans-serif;
+  background: #0f172a;
   color: white;
-  margin:0; padding:0;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
   max-width: 500px;
   margin: auto;
   padding: 2rem;
-  text-align: center;
 }
 
 h1, h2 {
-  margin-bottom: 1rem;
+  text-align: center;
 }
 
 input, button {
   width: 100%;
   padding: 0.8rem;
-  margin: 0.4rem 0;
+  margin-top: 0.5rem;
   border-radius: 6px;
   border: none;
   font-size: 1rem;
@@ -48,14 +48,12 @@ button:hover {
   display: block;
 }
 
-.participants {
-  margin-top: 1rem;
-  text-align: left;
+ul {
+  padding-left: 1rem;
 }
 
 video {
-  width:100%;
+  width: 100%;
   border-radius: 10px;
   background: black;
 }
-
