@@ -4,14 +4,13 @@ document.getElementById('login-btn').addEventListener('click', async () => {
   const msg = document.getElementById('auth-message');
 
   let res = await fetch('/login', {
-    method:'POST',
+    method: 'POST',
     headers: {'Content-Type':'application/json'},
     body: JSON.stringify({ username:user, password:pass })
   });
-
   let data = await res.json();
   if(res.ok){
-    window.location.href = `meeting.html?name=${encodeURIComponent(user)}&room=${Math.random().toString(36).substr(2,6)}`;
+    window.location.href = `dashboard.html?user=${encodeURIComponent(user)}`;
   } else {
     msg.textContent = data.error;
   }
@@ -23,12 +22,10 @@ document.getElementById('signup-btn').addEventListener('click', async () => {
   const msg = document.getElementById('auth-message');
 
   let res = await fetch('/signup', {
-    method:'POST',
+    method: 'POST',
     headers: {'Content-Type':'application/json'},
     body: JSON.stringify({ username:user, password:pass })
   });
-
   let data = await res.json();
   msg.textContent = res.ok ? "Signup successful! Please login." : data.error;
 });
-
