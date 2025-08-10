@@ -2,23 +2,18 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Wave Meet - Meeting</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 <div class="container">
-  <h1>Meeting Room: <span id="room-id"></span></h1>
+  <h1>Meeting ID: <span id="room-id"></span></h1>
   <video id="local-video" autoplay muted playsinline></video>
-  <div class="participants">
-    <h3>Participants</h3>
-    <ul id="participants-list"></ul>
-  </div>
-  <button id="leave-btn" style="background:#f87171;">Leave Meeting</button>
+  <h3>Participants</h3>
+  <ul id="participants-list"></ul>
+  <button id="leave-btn" style="background:#f87171;">Leave</button>
 </div>
-
 <script src="/socket.io/socket.io.js"></script>
 <script src="js/meeting.js"></script>
 </body>
 </html>
-
