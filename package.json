@@ -1,14 +1,13 @@
 {
   "name": "wave-meet",
   "version": "1.0.0",
-  "description": "Wave Meet - Video Conferencing App",
+  "description": "Wave Meet - Modern Intelligent Video Conferencing Web App",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
   },
-  "author": "Abhilash Mahapatra",
-  "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "socket.io": "^4.7.5"
   }
 }
