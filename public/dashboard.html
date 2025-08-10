@@ -1,1 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Wave Meet - Dashboard</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<div class="container">
+  <h1>Welcome to Wave Meet</h1>
+  <button id="instant-meeting-btn">Start Instant Meeting</button>
+  <h3>Schedule a Meeting</h3>
+  <form id="schedule-meeting-form">
+    <input type="text" name="title" placeholder="Meeting Title" required>
+    <input type="datetime-local" name="datetime" required>
+    <button type="submit">Schedule</button>
+  </form>
+  <h3>Scheduled Meetings</h3>
+  <div id="scheduled-meetings-container"></div>
+</div>
+<script src="js/dashboard.js"></script>
+</body>
+</html>
 
