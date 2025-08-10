@@ -2,43 +2,14 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Wave Meet - Meeting</title>
+  <title>Meeting Room</title>
   <link rel="stylesheet" href="css/style.css"/>
-  <style>
-    #controls button {
-      padding: 0.6rem 1rem;
-      border: none;
-      border-radius: 6px;
-      font-size: 1rem;
-      cursor: pointer;
-      background: #34d399;
-      color: white;
-      font-weight: bold;
-    }
-    #controls button:hover {
-      background: #059669;
-    }
-    #controls {
-      margin-top: 1rem;
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-    }
-    #leave-btn {
-      background: #f87171;
-    }
-    #leave-btn:hover {
-      background: #dc2626;
-    }
-  </style>
 </head>
 <body>
 <div class="container">
   <h1>Meeting ID: <span id="room-id"></span></h1>
 
-  <video id="local-video" autoplay muted playsinline
-         style="width: 100%; background: black; border-radius: 10px; margin-top: 1rem;">
-  </video>
+  <div id="video-grid" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
 
   <div id="controls">
     <button id="mic-btn">🎤 Unmuted</button>
@@ -46,10 +17,9 @@
     <button id="leave-btn">Leave</button>
   </div>
 
-  <h3 style="margin-top: 1rem;">Participants</h3>
+  <h3>Participants</h3>
   <ul id="participants-list"></ul>
 </div>
-
 <script src="/socket.io/socket.io.js"></script>
 <script src="js/meeting.js"></script>
 </body>
