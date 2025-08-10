@@ -1,13 +1,14 @@
 {
   "name": "wave-meet",
   "version": "1.0.0",
-  "description": "Wave Meet - Modern Intelligent Video Conferencing Web App",
+  "description": "Wave Meet - Instant & Scheduled Meetings",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
   },
   "dependencies": {
     "express": "^4.18.2",
-    "socket.io": "^4.7.5"
+    "socket.io": "^4.7.5",
+    "uuid": "^9.0.1"
   }
 }
