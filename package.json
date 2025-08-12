@@ -1,13 +1,15 @@
 {
   "name": "wave-meet",
   "version": "1.0.0",
-  "description": "Wave Meet - Instant & Scheduled Meetings",
+  "description": "Wave Meet - Multi-user video conferencing with DB auth",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "express": "^4.18.2",
+    "mongoose": "^8.2.1",
     "socket.io": "^4.7.5",
     "uuid": "^9.0.1"
   }
