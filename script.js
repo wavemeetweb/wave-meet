@@ -45,8 +45,15 @@ document.getElementById('scheduleMeetingBtn').onclick = () => {
   alert('Schedule meeting feature coming soon.');
 };
 
-// Create new meeting with video + mic
-document.getElementById('createMeetingBtn').onclick = async () => {
+// Create new meeting with prompt for name and video + mic
+document.getElementById('createMeetingBtn').onclick = () => {
+  // Prompt user for name before creating meeting
+  const userName = prompt('Enter your name to start the meeting:');
+  if (!userName || userName.trim() === '') {
+    alert('Name is required to start the meeting.');
+    return;
+  }
+  
   document.querySelector('.hero').style.display = 'none';
   document.getElementById('meetingActions').classList.add('hidden');
 
@@ -54,7 +61,10 @@ document.getElementById('createMeetingBtn').onclick = async () => {
   container.id = 'videoMeetingContainer';
   container.innerHTML = `
     <h2>Your Meeting Room</h2>
-    <video id="localVideo" autoplay muted playsinline></video>
+    <div class="video-wrapper">
+      <video id="localVideo" autoplay muted playsinline></video>
+      <div class="userNameTag">${userName}</div>
+    </div>
     <div class="controls">
       <button id="toggleVideo">Turn Off Video</button>
       <button id="toggleAudio">Mute Mic</button>
@@ -63,34 +73,35 @@ document.getElementById('createMeetingBtn').onclick = async () => {
   `;
   document.querySelector('main').appendChild(container);
 
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-    const localVideo = document.getElementById('localVideo');
-    localVideo.srcObject = stream;
+  // Access camera and mic
+  navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+    .then((stream) => {
+      const localVideo = document.getElementById('localVideo');
+      localVideo.srcObject = stream;
 
-    let videoEnabled = true;
-    document.getElementById('toggleVideo').onclick = () => {
-      videoEnabled = !videoEnabled;
-      stream.getVideoTracks()[0].enabled = videoEnabled;
-      document.getElementById('toggleVideo').textContent = videoEnabled ? 'Turn Off Video' : 'Turn On Video';
-    };
+      let videoEnabled = true;
+      document.getElementById('toggleVideo').onclick = () => {
+        videoEnabled = !videoEnabled;
+        stream.getVideoTracks()[0].enabled = videoEnabled;
+        document.getElementById('toggleVideo').textContent = videoEnabled ? 'Turn Off Video' : 'Turn On Video';
+      };
 
-    let audioEnabled = true;
-    document.getElementById('toggleAudio').onclick = () => {
-      audioEnabled = !audioEnabled;
-      stream.getAudioTracks()[0].enabled = audioEnabled;
-      document.getElementById('toggleAudio').textContent = audioEnabled ? 'Mute Mic' : 'Unmute Mic';
-    };
+      let audioEnabled = true;
+      document.getElementById('toggleAudio').onclick = () => {
+        audioEnabled = !audioEnabled;
+        stream.getAudioTracks()[0].enabled = audioEnabled;
+        document.getElementById('toggleAudio').textContent = audioEnabled ? 'Mute Mic' : 'Unmute Mic';
+      };
 
-    document.getElementById('endMeeting').onclick = () => {
-      stream.getTracks().forEach(track => track.stop());
+      document.getElementById('endMeeting').onclick = () => {
+        stream.getTracks().forEach(track => track.stop());
+        container.remove();
+        document.querySelector('.hero').style.display = 'block';
+      };
+    })
+    .catch(err => {
+      alert('Could not access camera and microphone: ' + err.message);
       container.remove();
       document.querySelector('.hero').style.display = 'block';
-    };
-
-  } catch (err) {
-    alert('Could not access camera and microphone: ' + err.message);
-    container.remove();
-    document.querySelector('.hero').style.display = 'block';
-  }
+    });
 };
