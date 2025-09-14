@@ -45,15 +45,17 @@ document.getElementById('scheduleMeetingBtn').onclick = () => {
   alert('Schedule meeting feature coming soon.');
 };
 
-// Create new meeting with prompt for name and video + mic
+// Create new meeting with prompt for name, show name, show generated code and video + mic
 document.getElementById('createMeetingBtn').onclick = () => {
-  // Prompt user for name before creating meeting
   const userName = prompt('Enter your name to start the meeting:');
   if (!userName || userName.trim() === '') {
     alert('Name is required to start the meeting.');
     return;
   }
   
+  // Generate a random 6-digit meeting code
+  const meetingCode = Math.floor(100000 + Math.random() * 900000).toString();
+
   document.querySelector('.hero').style.display = 'none';
   document.getElementById('meetingActions').classList.add('hidden');
 
@@ -61,6 +63,7 @@ document.getElementById('createMeetingBtn').onclick = () => {
   container.id = 'videoMeetingContainer';
   container.innerHTML = `
     <h2>Your Meeting Room</h2>
+    <p><strong>Meeting Code:</strong> <span id="meetingCode">${meetingCode}</span></p>
     <div class="video-wrapper">
       <video id="localVideo" autoplay muted playsinline></video>
       <div class="userNameTag">${userName}</div>
@@ -73,7 +76,6 @@ document.getElementById('createMeetingBtn').onclick = () => {
   `;
   document.querySelector('main').appendChild(container);
 
-  // Access camera and mic
   navigator.mediaDevices.getUserMedia({ video: true, audio: true })
     .then((stream) => {
       const localVideo = document.getElementById('localVideo');
