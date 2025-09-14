@@ -1,0 +1,183 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(120deg, #3a7bd5 0%, #00d2ff 100%);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background: rgba(255,255,255,0.96);
+  border-radius: 14px;
+  box-shadow: 0 6px 32px rgba(40,60,150,0.16);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  background: linear-gradient(90deg, #3a7bd5 40%, #00d2ff 100%);
+  background-clip: text;
+  color: transparent;
+  font-size: 2.6rem;
+  font-weight: 900;
+}
+
+nav a {
+  margin-left: 32px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: #1b75bb;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: #0080ff;
+}
+
+.hero {
+  text-align: center;
+  margin: 50px 0 40px;
+}
+
+.hero h2 {
+  font-size: 2.2rem;
+  color: #1b75bb;
+  margin-bottom: 0.5em;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  color: #37628b;
+  margin-bottom: 2em;
+}
+
+.actions button {
+  background: #3a7bd5;
+  color: white;
+  border: none;
+  margin: 12px;
+  padding: 14px 34px;
+  font-size: 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.actions button:hover {
+  background: #074072;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#meetingActions {
+  margin: 24px auto;
+  text-align: center;
+}
+
+#meetingActions form {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+#meetingActions input {
+  padding: 8px;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #adcbe3;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(40,60,150,0.18);
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+}
+.modal-content {
+  background: #fff;
+  border-radius: 10px;
+  padding: 32px;
+  width: 330px;
+  box-shadow: 0 4px 30px rgba(0,0,60,0.28);
+  text-align: center;
+  position: relative;
+}
+.close {
+  position: absolute;
+  right: 14px;
+  top: 12px;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #1b75bb;
+}
+#authTabs {
+  margin-bottom: 14px;
+}
+#authTabs button {
+  margin: 0 2px;
+  padding: 8px 19px;
+  border: none;
+  border-bottom: 3px solid transparent;
+  background: none;
+  font-size: 1.0rem;
+  cursor: pointer;
+  color: #3a7bd5;
+  font-weight: bold;
+  transition: border-color 0.2s;
+}
+#authTabs button.active {
+  border-bottom: 3px solid #00d2ff;
+}
+
+.oauth button {
+  margin: 8px 0;
+  width: 90%;
+  border-radius: 4px;
+  padding: 8px 0;
+  font-size: 1rem;
+  border: none;
+}
+.google-btn {
+  background: #ea4335;
+  color: white;
+}
+.facebook-btn {
+  background: #4267B2;
+  color: white;
+}
+#loginForm, #signupForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#loginForm input, #signupForm input {
+  padding: 9px;
+  border-radius: 3px;
+  border: 1px solid #adcbe3;
+  font-size: 1rem;
+}
+#loginForm button, #signupForm button {
+  background: #1b75bb;
+  color: white;
+  border: none;
+  padding: 10px 0;
+  border-radius: 3px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 8px;
+}
+#loginForm button:hover, #signupForm button:hover {
+  background: #074072;
+}
