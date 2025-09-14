@@ -188,6 +188,15 @@ nav a:hover {
   text-align: center;
 }
 
+#meetingCode {
+  font-size: 1.3rem;
+  color: #1b75bb;
+  font-weight: bold;
+  user-select: all; /* so user can copy easily */
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
 .video-wrapper {
   position: relative;
   display: inline-block;
