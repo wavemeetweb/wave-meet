@@ -5,7 +5,8 @@ const firebaseConfig = {
   projectId: "wave-meett",
   storageBucket: "<wave-meett>.firebasestorage.app",
   messagingSenderId: "866825007815",
-  appId: "1:866825007815:web:7074f02f551a232889c4e2"
+  appId: "1:866825007815:web:7074f02f551a232889c4e2"};
+
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -23,7 +24,6 @@ document.getElementById('signupBtn').onclick = function() {
 document.querySelector('.close').onclick = function() {
   document.getElementById('authModal').style.display = 'none';
 };
-// Tab logic
 function switchTab(tab) {
   if(tab==='login'){
     document.getElementById('loginFormWrap').classList.remove('hidden');
@@ -69,7 +69,8 @@ document.getElementById('loginForm').onsubmit = async (e) => {
     alert(err.message);
   }
 };
-// Google/Facebook OAuth
+
+// Google OAuth login ONLY (no Facebook)
 document.querySelectorAll('.google-btn').forEach(btn => {
   btn.onclick = async () => {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -78,16 +79,6 @@ document.querySelectorAll('.google-btn').forEach(btn => {
       alert('Google sign-in successful');
       document.getElementById('authModal').style.display = 'none';
     } catch(err) { alert('Google login error '+err.message);}
-  };
-});
-document.querySelectorAll('.facebook-btn').forEach(btn => {
-  btn.onclick = async () => {
-    const provider = new firebase.auth.FacebookAuthProvider();
-    try {
-      await auth.signInWithPopup(provider);
-      alert('Facebook sign-in successful');
-      document.getElementById('authModal').style.display = 'none';
-    } catch(err) { alert('Facebook login error '+err.message);}
   };
 });
 
@@ -207,5 +198,9 @@ document.getElementById('joinForm').onsubmit = async (e) => {
       alert('Could not access camera and microphone: ' + err.message);
       container.remove();
       document.querySelector('.hero').style.display = 'block';
-    });
-};
+
+
+
+
+
+
