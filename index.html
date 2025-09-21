@@ -2,131 +2,73 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Wave Meet - Firebase Auth</title>
-  <style>
-    body { font-family: Arial, sans-serif; max-width: 480px; margin: 2em auto; }
-    input, button { padding: 8px; margin: 6px 0; width: 100%; box-sizing: border-box; }
-    .oauth-btn { margin-top: 10px; cursor: pointer; }
-  </style>
-</head>
-<body>
-  <h1>Wave Meet - Login / Signup</h1>
-
-  <div id="user-info" style="display:none;">
-    Logged in as: <span id="user-name"></span> (<span id="user-email"></span>)
-    <button id="logout-btn">Logout</button>
-  </div>
-
-  <div id="auth-forms">
-    <h2>Sign Up</h2>
-    <input id="signup-name" placeholder="Full Name" />
-    <input id="signup-email" placeholder="Email" type="email" />
-    <input id="signup-password" placeholder="Password" type="password" />
-    <button id="signup-btn">Sign Up</button>
-
-    <h2>Login</h2>
-    <input id="login-email" placeholder="Email" type="email" />
-    <input id="login-password" placeholder="Password" type="password" />
-    <button id="login-btn">Login</button>
-
-    <hr/>
-
-    <button class="oauth-btn" id="google-login">Login with Google</button>
-    <button class="oauth-btn" id="facebook-login">Login with Facebook</button>
-  </div>
-
-  <!-- Firebase SDK -->
+  <title>Wave Meet</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-
-  <!-- Your Firebase JS logic -->
-  <script>
-    // Firebase config - replace with *your* Firebase project config
-    const firebaseConfig = {
-      apiKey: "<YOUR-API-KEY>",
-      authDomain: "<YOUR-PROJECT>.firebaseapp.com",
-      projectId: "<YOUR-PROJECT>",
-      storageBucket: "<YOUR-PROJECT>.appspot.com",
-      messagingSenderId: "<SENDER-ID>",
-      appId: "<APP-ID>"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-
-    const userInfoDiv = document.getElementById('user-info');
-    const authFormsDiv = document.getElementById('auth-forms');
-    const userNameSpan = document.getElementById('user-name');
-    const userEmailSpan = document.getElementById('user-email');
-
-    function updateUI(user) {
-      if(user) {
-        authFormsDiv.style.display = 'none';
-        userInfoDiv.style.display = 'block';
-        userNameSpan.textContent = user.displayName || 'No Name';
-        userEmailSpan.textContent = user.email;
-      } else {
-        authFormsDiv.style.display = 'block';
-        userInfoDiv.style.display = 'none';
-      }
-    }
-
-    auth.onAuthStateChanged(user => {
-      updateUI(user);
-    });
-
-    // Sign Up
-    document.getElementById('signup-btn').addEventListener('click', async () => {
-      const email = document.getElementById('signup-email').value;
-      const password = document.getElementById('signup-password').value;
-      const name = document.getElementById('signup-name').value;
-      try {
-        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-        await userCredential.user.updateProfile({ displayName: name });
-        alert('Signed up successfully!');
-      } catch (err) {
-        alert('Error: ' + err.message);
-      }
-    });
-
-    // Login
-    document.getElementById('login-btn').addEventListener('click', async () => {
-      const email = document.getElementById('login-email').value;
-      const password = document.getElementById('login-password').value;
-      try {
-        await auth.signInWithEmailAndPassword(email, password);
-        alert('Logged in successfully!');
-      } catch (err) {
-        alert('Error: ' + err.message);
-      }
-    });
-
-    // Logout
-    document.getElementById('logout-btn').addEventListener('click', () => {
-      auth.signOut();
-    });
-
-    // Google login
-    document.getElementById('google-login').addEventListener('click', async () => {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      try {
-        await auth.signInWithPopup(provider);
-        alert('Google sign-in successful');
-      } catch (err) {
-        alert('Google login error: ' + err.message);
-      }
-    });
-
-    // Facebook login
-    document.getElementById('facebook-login').addEventListener('click', async () => {
-      const provider = new firebase.auth.FacebookAuthProvider();
-      try {
-        await auth.signInWithPopup(provider);
-        alert('Facebook sign-in successful');
-      } catch (err) {
-        alert('Facebook login error: ' + err.message);
-      }
-    });
-  </script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1 class="logo">Wave Meet</h1>
+      <nav>
+        <a href="#" id="loginBtn">Login</a>
+        <a href="#" id="signupBtn">Signup</a>
+      </nav>
+    </header>
+    <main>
+      <section class="hero">
+        <h2>Connect, Meet, Collaborate</h2>
+        <p>Beautiful video meetings made easy. Schedule, create, or join in seconds!</p>
+        <div class="actions">
+          <button id="createMeetingBtn">Create New Meeting</button>
+          <button id="scheduleMeetingBtn">Schedule a Meeting</button>
+          <button id="joinMeetingBtn">Join with Code</button>
+        </div>
+      </section>
+      <section id="meetingActions" class="hidden">
+        <form id="joinForm">
+          <input type="text" id="joinMeetingCode" placeholder="Enter Meeting Code" required>
+          <input type="text" id="joinName" placeholder="Your Name" required>
+          <button type="submit">Join</button>
+        </form>
+      </section>
+    </main>
+    <div class="modal" id="authModal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="authTabs">
+          <button id="tabLogin">Login</button>
+          <button id="tabSignup">Signup</button>
+        </div>
+        <div id="loginFormWrap">
+          <form id="loginForm">
+            <input type="email" placeholder="Email" required />
+            <input type="password" placeholder="Password" required />
+            <button type="submit">Login</button>
+            <div class="oauth">
+              <button class="google-btn" type="button">Login with Google</button>
+              <button class="facebook-btn" type="button">Login with Facebook</button>
+            </div>
+          </form>
+        </div>
+        <div id="signupFormWrap" class="hidden">
+          <form id="signupForm">
+            <input type="text" placeholder="Full Name" required />
+            <input type="date" placeholder="Birthdate" required />
+            <input type="email" placeholder="Email" required />
+            <input type="password" placeholder="Password" required />
+            <button type="submit">Signup</button>
+            <div class="oauth">
+              <button class="google-btn" type="button">Signup with Google</button>
+              <button class="facebook-btn" type="button">Signup with Facebook</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
