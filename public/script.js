@@ -198,7 +198,8 @@ document.getElementById('joinForm').onsubmit = async (e) => {
       alert('Could not access camera and microphone: ' + err.message);
       container.remove();
       document.querySelector('.hero').style.display = 'block';
-
+});
+};
 
 
 
