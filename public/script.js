@@ -1,12 +1,10 @@
-// ------- Firebase Authentication -------
 const firebaseConfig = {
   apiKey: "AIzaSyBsMMxOpiriP1UfQ45yvs-aR6SgQblO7Nc",
   authDomain: "wave-meett.firebaseapp.com",
   projectId: "wave-meett",
-  storageBucket: "<wave-meett>.firebasestorage.app",
+  storageBucket: "wave-meett.firebasestorage.app",
   messagingSenderId: "866825007815",
-  appId: "1:866825007815:web:7074f02f551a232889c4e2"};
-
+  appId: "1:866825007815:web:7074f02f551a232889c4e2"
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -198,10 +196,5 @@ document.getElementById('joinForm').onsubmit = async (e) => {
       alert('Could not access camera and microphone: ' + err.message);
       container.remove();
       document.querySelector('.hero').style.display = 'block';
-});
+    });
 };
-
-
-
-
-
