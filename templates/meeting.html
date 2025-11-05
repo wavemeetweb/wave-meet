@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wave Meet - Meeting Room</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/meeting.css') }}" />
+</head>
+<body>
+    <div class="meeting-container">
+        <header class="meeting-header">
+            <div class="meeting-info">
+                <h2>🌊 Wave Meet</h2>
+                <span class="meeting-code">Meeting: {{ meeting_code }}</span>
+            </div>
+            <div class="participant-count">
+                <span id="participantCount">0 participants</span>
+            </div>
+        </header>
+
+        <div class="video-grid" id="videoGrid">
+            <div class="video-container local-video">
+                <video id="localVideo" autoplay muted playsinline></video>
+                <div class="video-label">You</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="control-btn" id="toggleVideo" title="Toggle Camera">
+                <span class="icon">📹</span>
+            </button>
+            <button class="control-btn" id="toggleAudio" title="Toggle Microphone">
+                <span class="icon">🎤</span>
+            </button>
+            <button class="control-btn" id="shareScreen" title="Share Screen">
+                <span class="icon">🖥️</span>
+            </button>
+            <button class="control-btn danger" id="leaveCall" title="Leave Meeting">
+                <span class="icon">📞</span>
+            </button>
+        </div>
+
+        <div class="chat-panel" id="chatPanel">
+            <div class="chat-header">
+                <h3>Chat</h3>
+                <button class="close-chat" onclick="toggleChat()">✕</button>
+            </div>
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-input-container">
+                <input type="text" id="chatInput" placeholder="Type a message..." />
+                <button id="sendMessage">Send</button>
+            </div>
+        </div>
+
+        <button class="chat-toggle" onclick="toggleChat()">💬</button>
+    </div>
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='js/meeting.js') }}"></script>
+    <script>
+        const MEETING_CODE = "{{ meeting_code }}";
+        const participantName = sessionStorage.getItem('participantName') || 'Anonymous';
+        initializeMeeting(MEETING_CODE, participantName);
+    </script>
+</body>
+</html>
